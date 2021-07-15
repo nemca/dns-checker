@@ -129,7 +129,15 @@ func pinger(ns string, m *dns.Msg, t time.Duration, statHistogram *stats.Histogr
 			if err != nil {
 				fmt.Fprintf(&buf, "%v\n", time.Now())
 				fmt.Fprintf(&buf, "Nameserver: %s\n", ns)
-				fmt.Fprintf(&buf, "exchange failed: %v (rtt: %v)\n", err, rtt)
+				fmt.Fprintf(&buf, "Exchange failed: %v (rtt: %v)\n", err, rtt)
+				fmt.Println(buf.String())
+				errorCount++
+				continue
+			}
+			if res.Rcode != dns.RcodeSuccess {
+				fmt.Fprintf(&buf, "%v\n", time.Now())
+				fmt.Fprintf(&buf, "Nameserver: %s\n", ns)
+				fmt.Fprintf(&buf, "Bad RCODE: %s (rtt: %v)\n", dns.RcodeToString[res.Rcode], rtt)
 				fmt.Println(buf.String())
 				errorCount++
 				continue
