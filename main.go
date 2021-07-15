@@ -84,7 +84,7 @@ func main() {
 	// Channel for terminating by signal
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
-	// Channel for stop goroutings
+	// Channel for stop goroutins
 	done := make(chan int)
 
 	// Stats

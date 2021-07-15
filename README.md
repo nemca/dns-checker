@@ -1,6 +1,6 @@
 # dns-checker
 
-The tool for diagnostics DNS.
+The tool for DNS diagnostics.
 
 #### Usage
 ```
